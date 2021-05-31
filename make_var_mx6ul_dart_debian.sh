@@ -734,6 +734,10 @@ function make_sdcard() {
 		part="p"
 	fi
 
+	if [ `echo ${LPARAM_BLOCK_DEVICE} | grep -c loop` -ne 0 ]; then
+		part="p"
+	fi
+
 	# Check that we're using a valid device
 	if ! check_sdcard ${LPARAM_BLOCK_DEVICE}; then
 		return 1
