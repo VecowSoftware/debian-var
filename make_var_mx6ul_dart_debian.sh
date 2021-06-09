@@ -48,9 +48,9 @@ readonly G_LINUX_DTB='imx6ul-var-dart-emmc_wifi.dtb imx6ul-var-dart-nand_wifi.dt
 
 ## uboot
 readonly G_UBOOT_SRC_DIR="${DEF_SRC_DIR}/uboot"
-readonly G_UBOOT_GIT="https://github.com/varigit/uboot-imx.git"
-readonly G_UBOOT_BRANCH="imx_v2017.03_4.9.11_1.0.0_ga_var01"
-readonly G_UBOOT_REV="539c83f017e56a252c66ad867d0e31f5d68b28ac"
+readonly G_UBOOT_GIT="https://github.com/VecowSoftware/uboot-imx.git"
+readonly G_UBOOT_BRANCH="VIG-100_board"
+readonly G_UBOOT_REV="563307dc96758d4c66507061ee8349c34c8c0e0e"
 readonly G_UBOOT_DEF_CONFIG_MMC='mx6ul_var_dart_mmc_defconfig'
 readonly G_UBOOT_DEF_CONFIG_NAND='mx6ul_var_dart_nand_defconfig'
 readonly G_UBOOT_NAME_FOR_EMMC='u-boot.img.mmc'
