@@ -1,0 +1,48 @@
+1. Installing required packages
+On Ubuntu building machine:
+$ sudo apt-get install binfmt-support qemu qemu-user-static debootstrap kpartx \
+lvm2 dosfstools gpart binutils bison git lib32ncurses5-dev libssl-dev python-m2crypto gawk wget \
+git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev \
+autoconf libtool libglib2.0-dev libarchive-dev python-git xterm sed cvs subversion \
+kmod coreutils texi2html bc docbook-utils python-pysqlite2 help2man make gcc g++ \
+desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial automake groff curl \
+lzop asciidoc u-boot-tools mtd-utils device-tree-compiler flex
+
+2. Deploy source
+$ cd ~
+$ git clone https://github.com/VecowSoftware/debian-var.git -b VIG-100_board VIG-100_board
+$ cd ~/VIG-100_board/debian-var/
+$ sudo ./make_var_mx6ul_dart_debian.sh -c deploy
+
+3. Build all 
+Internet connection should be available
+$ cd ~/VIG-100_board/
+$ sudo ./make_var_mx6ul_dart_debian.sh -c all |& tee build.log
+
+4.1 Create boot SD card 
+sudo ./make_var_mx6ul_dart_debian.sh -c sdcard -d /dev/sdX
+
+
+4.2 Create a boot SD card image using a loop device
+
+It is also possible to use the "./make_var_mx6ul_dart_debian.sh" script to create a boot SD card image, while using a loop device instead of attaching a real SD card.
+
+Create an empty file using the following command:
+
+$ dd if=/dev/zero of=imx6ul-var-dart-debian-sd.img bs=1M count=3720
+The above command creates a 3700MiB file representing the SD card.
+
+Attach the first available loop device to this file:
+
+$ sudo losetup -Pf imx6ul-var-dart-debian-sd.img
+To find the actual loop device being used, run: $ losetup -a | grep imx6ul-var-dart-debian-sd.img
+
+Write the content to the loop device to generate the SD card image:
+
+$ sudo ./make_var_mx6ul_dart_debian.sh -c sdcard -d /dev/loopX
+(Replace /dev/loopX with your actual loop device, e.g. /dev/loop0)
+
+Detach the loop device from the file:
+
+$ sudo losetup -d /dev/loopX
+
